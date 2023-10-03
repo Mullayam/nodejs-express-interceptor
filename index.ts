@@ -12,7 +12,6 @@ export class Interceptor {
         if (settings.isEnable) {
             this.InterceptResponse()
         }
-
     }
     /**
      * Private function that intercepts the response.
@@ -22,13 +21,13 @@ export class Interceptor {
      * @private
      * @return {void}
      */
-    private InterceptResponse():void {
+    private InterceptResponse(): void {
         const _this = this
         console.log("Response is using Interceptor")
         Interceptor.app.use(function (req: Request, res: Response, next: NextFunction) {
             try {
                 const oldJSON = res.json;
-                res.json = (data) => {
+                res.json = (data: any) => {
                     if (data && data.then != undefined) {
                         return data.then((resData: any) => {
                             res.json = oldJSON;
@@ -48,7 +47,6 @@ export class Interceptor {
             }
         })
     }
-
 
     /**
      * Initializes and configures the use of interceptors in the application.
